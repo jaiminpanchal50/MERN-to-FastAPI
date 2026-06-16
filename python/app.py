@@ -410,4 +410,155 @@ def expenses_tracker():
         else:
             print("Invalid choice. Please try again.")
 
-expenses_tracker()
+# expenses_tracker()
+
+
+
+def add_task(tasks):
+    title = input("Enter title of task >>> ").strip()
+    status = input("Task status should be Pending or Done >>> ").strip() or "Pending"
+
+    if not title or not status:
+        print("-------------------------------Please enter valid title or status-------------------------------")
+        return
+
+    for task in tasks:
+        if task['title'] == title:
+            print(f"-------------------------------Title should be unique-------------------------------")
+            return
+
+
+    new_task={
+        "title":title,
+        "status":status
+    }
+
+    print(f"{new_task}")
+
+    print(f"-------------------------------task added successfully-------------------------------")
+
+    tasks.append(new_task)
+
+
+def view_task(tasks):    
+    if not tasks:
+        print("No tasks found.")
+        return
+
+    for task in tasks:
+            print(f"Title: {task['title']}")
+            print(f"status: {task['status']}")
+            print("-----------------------------------")
+        
+
+def mark_done_task(tasks):
+    title = input("Enter title of task >>> ").strip()
+
+    if not title:
+        print("-------------------------------Please enter valid title-------------------------------")
+        return
+
+    for task in tasks:
+        if task['title'] == title:
+            print(f"-------------------------------Task Found-------------------------------")
+            print(f"Title: {task['title']}")
+            print(f"status: {task['status']}")
+            new_status = "Done"
+
+            task['status'] = new_status
+            print("-------------------------------Task updated successfully-------------------------------")
+            return
+    else:
+        print("-------------------------------Task not found-------------------------------")
+
+
+def view_done_task(tasks):
+    for task in tasks:
+        if task['status'] == "Done":
+            print(f"-------------------------------Done Task Found-------------------------------")
+            print(f"Title: {task['title']}")
+            print(f"status: {task['status']}")
+        else:
+            print(f"-------------------------------Task Not Found-------------------------------")
+
+
+def delete_task(tasks):
+    title = input("Enter title of task >>> ").strip()
+
+    if not title:
+        print("-------------------------------Please enter valid title-------------------------------")
+        return
+
+    for task in tasks:
+        if task['title'] == title:
+            print(f"-------------------------------Task Found-------------------------------")
+            print(f"Title: {task['title']}")
+            print(f"status: {task['status']}")
+            tasks.remove(task)
+            print("-------------------------------Task deleted successfully-------------------------------")
+            return
+    else:
+        print("-------------------------------Task not found-------------------------------")
+
+
+
+def to_do_app():
+    tasks=[]
+
+    while True:
+
+        print("\n===== Tasks =====")
+        print("1. Add task")
+        print("2. View task")
+        print("3. Mark Done")
+        print("4. View Done Tasks")
+        print("5. Delete task")
+        print("6. Exit")
+
+        choice = input("Enter your choice: ")
+        print("----------------------------------")
+        if choice == "1":
+            add_task(tasks)
+
+        elif choice == "2":
+            view_task(tasks)
+
+        elif choice == "3":
+            mark_done_task(tasks)
+
+        elif choice == "4":
+            view_done_task(tasks)
+
+        elif choice == "5":
+            delete_task(tasks)
+
+        elif choice == "6":
+            print("Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+
+
+# to_do_app()
+
+#read file
+
+f = open('python/demo.txt')
+# print(f.read())
+
+
+
+
+import json
+
+student = {
+    "name": "Jaimin",
+    "course": "Python",
+    "marks": 95
+}
+
+json_student = json.dumps(student)
+print(json_student)
+print(type(json_student))
